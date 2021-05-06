@@ -27,7 +27,7 @@
   },
   "homepage": "https://github.com/Butterstroke/Miyuu#readme",
 	"lint-staged": {
-		"*.{js,jsx,json}": [
+		"*.{js,jsx,json,ts,tsx}": [
 			"prettier --write",
 			"eslint --fix"
 		]
