@@ -9,7 +9,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
-    "start": "build/index.js"
+    "start": "build/index.js",
+    "eslint": "eslint .",
+		"prettier": "prettier --write ."
   },
   "repository": {
     "type": "git",
@@ -24,6 +26,12 @@
     "url": "https://github.com/Butterstroke/Miyuu/issues"
   },
   "homepage": "https://github.com/Butterstroke/Miyuu#readme",
+	"lint-staged": {
+		"*.{js,jsx,json}": [
+			"prettier --write",
+			"eslint --fix"
+		]
+	},
   "peerDependencies": {
     "discord.js": "^12.5.3"
   },
