@@ -1,2 +1,2 @@
-# DJSFramework
+# Miyuu
 A Discord.js framework
