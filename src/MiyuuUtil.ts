@@ -3,28 +3,30 @@
  */
 
 import { MiyuuDate } from "./classes/MiyuuDate";
-import { MiyuuOptions } from "./types/MiyuuOptions";
+import { MiyuuOptions } from "./interfaces/MiyuuOptions";
 
 export class MiyuuUtil {
-    date: MiyuuDate;
+	date: MiyuuDate;
 
-    constructor(options: MiyuuOptions={}) {
-        this.date = new MiyuuDate(options.dateOptions);
-    }
-
-    toTitleCase (text: string) {
-		return text.split(" ").map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()).join(" ");
+	constructor(options: MiyuuOptions) {
+		this.date = new MiyuuDate(options.dateOptions);
 	}
 
-	getRandom (min: number, max: number) {
+	toTitleCase(text: string): string {
+		return text
+			.split(" ")
+			.map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+			.join(" ");
+	}
+
+	getRandom(min: number, max: number): number {
 		return Math.floor(Math.random() * (max - min)) + min;
 	}
 }
 
 /* Exports all needed utilities for the client. */
 
-/*export * as dataManager from "./dataManager";
-export * as speech from "./speechHelper";
+/*export * as speech from "./speechHelper";
 
 exports.util = {
 	presenceHelper: require("./presenceHelper"),
