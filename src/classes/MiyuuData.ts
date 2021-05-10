@@ -2,12 +2,19 @@ import { MiyuuDB, MiyuuDBOptions } from "../interfaces/MiyuuDB";
 import { join } from "path";
 import { existsSync } from "fs";
 import { dataSchema, defaultSchema } from "../interfaces/dataSchema";
+import { MiyuuClient } from "../MiyuuClient";
 
 export class MiyuuData implements MiyuuDB {
+	client: MiyuuClient;
 	db: MiyuuDB;
 	assetDirectory: string;
 
-	constructor(options: MiyuuDBOptions, assetDirectory: string, dataSchema: dataSchema = new defaultSchema()) {
+	constructor(
+		client: MiyuuClient,
+		options: MiyuuDBOptions,
+		assetDirectory: string,
+		dataSchema: dataSchema = new defaultSchema()
+	) {
 		let dbPath = join(__dirname, "/plugins/", options.provider + ".js");
 		if (!existsSync(dbPath)) {
 			dbPath = join(assetDirectory, "/plugins/", options.provider + ".js");
@@ -18,6 +25,7 @@ export class MiyuuData implements MiyuuDB {
 			throw new Error(`Database plugin ${options.provider} does not exist!`);
 		}
 
+		this.client = client;
 		this.db = new (require(dbPath))(options, dataSchema);
 	}
 

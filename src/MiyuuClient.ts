@@ -14,7 +14,7 @@ export class MiyuuClient extends Client {
 
 		this.baseDirectory = require.main.path;
 		this.util = new MiyuuUtil(options);
-		this.data = new MiyuuData(options.database, this.assetDirectory);
+		this.data = new MiyuuData(this, options.database, this.assetDirectory);
 		this.assetDirectory = options.assetDirectory ? options.assetDirectory : `${this.baseDirectory}\\assets`;
 	}
 

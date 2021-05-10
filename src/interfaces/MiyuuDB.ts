@@ -1,3 +1,5 @@
+import { MiyuuClient } from "../MiyuuClient";
+
 export interface MiyuuDBOptions {
 	provider: string;
 	SQLiteDirectory?: string;
@@ -8,6 +10,8 @@ export interface MiyuuDBOptions {
 }
 
 export interface MiyuuDB {
+	client: MiyuuClient;
+
 	/**
 	 * Initialize the database setup.
 	 */

@@ -8,19 +8,16 @@ assignees: Butterstroke
 ---
 
 **Description**
-<!-- A clear and concise description of what the bug is. Command names, error messages, etc.. are good things to include here. -->
+<!-- A clear and concise description of what the bug is. Error messages and other things of that nature are good things to include here. -->
 
 **Steps to Reproduce**
-<!-- Explain what steps you did to get this error? Did you run another command? Did you react to a message? What did you input into the command?  -->
+<!-- Explain what steps you did to get this error? How did you run it? What did you input into the method?  -->
 1.
 2.
 3.
 
 **Environment**
-- [ ] Public Instance
-- [ ] Self-Hosted
-
-<!-- If a self-hosted program is having an issue, be sure to include the Node version and MargarineBot version you are running -->
+<!-- What is your software environment like? List your operating system and Node version at a minimum. -->
 
 **Screenshots**
 <!-- If something seems too complex to explain, a few pictures may help. Or include some to help support your description. -->
