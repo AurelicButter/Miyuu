@@ -1,5 +1,5 @@
 # Miyuu
-![License](https://img.shields.io/github/license/Butterstroke/MargarineBot.svg?style=flat-square) ![Support Server](https://discordapp.com/api/guilds/303253034551476225/widget.png)
+![License](https://img.shields.io/github/license/Butterstroke/Miyuu.svg?style=flat-square) ![Support Server](https://discordapp.com/api/guilds/303253034551476225/widget.png)
 
 A Discord.js framework built for the [MargarineBot Project](https://github.com/Butterstroke/MargarineBot).
 
