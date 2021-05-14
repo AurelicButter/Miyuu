@@ -53,7 +53,7 @@ export class MiyuuData implements MiyuuDB {
 		return collected;
 	}
 
-	async update(collection: string, userID: string, key: string, value: any): Promise<boolean> {
+	async update(collection: string, userID: string, key: string, value: unknown): Promise<boolean> {
 		const updated = await this.db.update(collection, userID, key, value);
 
 		if (!updated) {
