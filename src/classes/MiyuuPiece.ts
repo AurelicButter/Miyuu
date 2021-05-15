@@ -9,14 +9,14 @@ export interface MiyuuPieceOptions {
 
 export class MiyuuPiece implements MiyuuPieceOptions {
 	client: MiyuuClient;
-	file: string; // File name
+	file: string[]; // File name
 	directory: string; // Where piece is stored
 	name: string;
 	enabled = true;
 	store: MiyuuStore;
 	aliases: string[];
 
-	constructor(store: MiyuuStore, file: string, directory: string, options: MiyuuPieceOptions) {
+	constructor(store: MiyuuStore, file: string[], directory: string, options: MiyuuPieceOptions) {
 		this.client = store.client;
 		this.file = file;
 		this.directory = directory;
@@ -42,7 +42,7 @@ export class MiyuuPiece implements MiyuuPieceOptions {
 	}
 
 	async reload(): Promise<MiyuuPiece> {
-		const piece = this.store.load(this.directory, [this.file]);
+		const piece = this.store.load(this.directory, this.file);
 		if (piece) {
 			await piece.init();
 			return piece;
@@ -66,7 +66,7 @@ export class MiyuuPiece implements MiyuuPieceOptions {
 	toJSON(): { directory: string; file: string; path: string; name: string; enabled: boolean; aliases: string[] } {
 		return {
 			directory: this.directory,
-			file: this.file,
+			file: this.file.join("\\"),
 			path: this.path,
 			name: this.name,
 			enabled: this.enabled,
