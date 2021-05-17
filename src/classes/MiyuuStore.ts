@@ -8,12 +8,12 @@ import { join, relative, sep } from "path";
 export class MiyuuStore extends Collection<string, MiyuuPiece> {
 	client: MiyuuClient;
 	name: string;
-	value: MiyuuPiece;
+	value: typeof MiyuuPiece;
 	pieceDir: string;
 	pieces: Set<MiyuuPiece> = new Set<MiyuuPiece>();
 	aliases: Collection<string, MiyuuPiece> = new Collection();
 
-	constructor(client: MiyuuClient, name: string, value: MiyuuPiece) {
+	constructor(client: MiyuuClient, name: string, value: typeof MiyuuPiece) {
 		super();
 		this.client = client;
 		this.name = name;
