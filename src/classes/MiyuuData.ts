@@ -1,7 +1,6 @@
 import { MiyuuDB, MiyuuDBOptions } from "../interfaces/MiyuuDB";
 import { join } from "path";
 import { existsSync } from "fs";
-import { dataSchema, defaultSchema } from "../interfaces/dataSchema";
 import { MiyuuClient } from "../MiyuuClient";
 
 export class MiyuuData implements MiyuuDB {
@@ -9,12 +8,11 @@ export class MiyuuData implements MiyuuDB {
 	db: MiyuuDB;
 	assetDirectory: string;
 
-	constructor(
-		client: MiyuuClient,
-		options: MiyuuDBOptions,
-		assetDirectory: string,
-		dataSchema: dataSchema = new defaultSchema()
-	) {
+	constructor(client: MiyuuClient, options: MiyuuDBOptions, assetDirectory: string) {
+		if (!options.schema) {
+			throw new Error(`ERROR: No data schema is provided for database. Failed to verify schema.`);
+		}
+
 		let dbPath = join(__dirname, "/plugins/", options.provider + ".js");
 		if (!existsSync(dbPath)) {
 			dbPath = join(assetDirectory, "/plugins/", options.provider + ".js");
@@ -26,7 +24,7 @@ export class MiyuuData implements MiyuuDB {
 		}
 
 		this.client = client;
-		this.db = new (require(dbPath))(options, dataSchema);
+		this.db = new (require(dbPath))(options, options.schema);
 	}
 
 	async initialize(): Promise<void> {

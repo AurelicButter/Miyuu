@@ -11,7 +11,7 @@ export class MiyuuClient extends Client {
 	data: MiyuuData;
 	arguments: ArgumentStore;
 
-	constructor(options: MiyuuOptions = { database: { provider: "sqlite", SQLiteDirectory: "./MiyuuDB.sqlite" } }) {
+	constructor(options: MiyuuOptions) {
 		super(options);
 
 		this.baseDirectory = require.main.path;

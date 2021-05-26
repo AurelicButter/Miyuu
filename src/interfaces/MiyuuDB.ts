@@ -1,7 +1,9 @@
 import { MiyuuClient } from "../MiyuuClient";
+import { dataSchema } from "./dataSchema";
 
 export interface MiyuuDBOptions {
 	provider: string;
+	schema: dataSchema;
 	SQLiteDirectory?: string;
 	host?: string;
 	port?: number;
