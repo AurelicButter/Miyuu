@@ -6,4 +6,5 @@ export interface MiyuuOptions extends ClientOptions {
 	assetDirectory?: string;
 	dateOptions?: DateOptions;
 	database: MiyuuDBOptions;
+	permissionLevels?: number;
 }

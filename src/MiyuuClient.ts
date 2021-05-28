@@ -3,6 +3,7 @@ import { MiyuuUtil } from "./MiyuuUtil";
 import { MiyuuOptions } from "./interfaces/MiyuuOptions";
 import { MiyuuData } from "./classes/MiyuuData";
 import { ArgumentStore } from "./structures/ArgumentStore";
+import { MiyuuPermissions } from "./classes/MiyuuPermissions";
 
 export class MiyuuClient extends Client {
 	baseDirectory: string;
@@ -10,6 +11,7 @@ export class MiyuuClient extends Client {
 	util: MiyuuUtil;
 	data: MiyuuData;
 	arguments: ArgumentStore;
+	permissions: MiyuuPermissions;
 
 	constructor(options: MiyuuOptions) {
 		super(options);
@@ -20,6 +22,8 @@ export class MiyuuClient extends Client {
 		this.assetDirectory = options.assetDirectory ? options.assetDirectory : `${this.baseDirectory}\\assets`;
 
 		this.arguments = new ArgumentStore(this);
+
+		this.permissions = new MiyuuPermissions(options.permissionLevels);
 	}
 
 	clientTest(): void {
