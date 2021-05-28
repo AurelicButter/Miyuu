@@ -1,13 +1,7 @@
 import { Collection } from "discord.js";
 import MiyuuMessage from "./MiyuuMessage";
 
-export interface PermissionOptions {
-	check: (message: typeof MiyuuMessage) => boolean | null; // Check the permission levels
-	break?: boolean; // Break execution for higher levels
-	fetch?: boolean; // Autofetch a member or not.
-}
-
-class defaultPermission implements PermissionOptions {
+export class PermissionOptions {
 	check: (message: typeof MiyuuMessage) => boolean | null; // Check permission levels
 	break: boolean; // Break execution for higher levels
 	fetch: boolean; // Autofetch a member or not.
@@ -24,16 +18,16 @@ class defaultPermission implements PermissionOptions {
 	}
 }
 
-export class MiyuuPermissions extends Collection<number, defaultPermission> {
+export class MiyuuPermissions extends Collection<number, PermissionOptions> {
 	constructor(levels = 11) {
 		super();
 
 		for (let x = 0; x < levels; x++) {
-			super.set(x, null);
+			super.set(x, new PermissionOptions());
 		}
 	}
 
-	private setItem(level: number, permission: defaultPermission): this {
+	private setItem(level: number, permission: PermissionOptions): this {
 		if (level < 0) {
 			throw new Error(`Permission levels start at 0. Cannot do level ${level}!`);
 		}
@@ -44,15 +38,26 @@ export class MiyuuPermissions extends Collection<number, defaultPermission> {
 	}
 
 	addCheck(level: number, check: (message: typeof MiyuuMessage) => boolean | null): this {
-		return this.setItem(level, new defaultPermission(check));
+		return this.setItem(level, new PermissionOptions(check));
 	}
 
-	addOptions(level: number, permission: PermissionOptions): this {
-		return this.setItem(level, new defaultPermission(permission.check, permission.break, permission.fetch));
+	addOptions(
+		level: number,
+		options: {
+			check: (message: typeof MiyuuMessage) => boolean | null;
+			permBreak?: boolean;
+			fetch?: boolean;
+		}
+	): this {
+		return this.setItem(level, new PermissionOptions(options.check, options.permBreak, options.fetch));
+	}
+
+	add(level: number, permission: PermissionOptions): this {
+		return this.setItem(level, permission);
 	}
 
 	remove(level: number): this {
-		return this.setItem(level, new defaultPermission());
+		return this.setItem(level, new PermissionOptions());
 	}
 
 	async run(message: typeof MiyuuMessage, level: number): Promise<{ broke: boolean; permission: boolean }> {
