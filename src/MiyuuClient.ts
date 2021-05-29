@@ -5,6 +5,7 @@ import { MiyuuData } from "./classes/MiyuuData";
 import { ArgumentStore } from "./structures/ArgumentStore";
 import { MiyuuPermissions } from "./classes/MiyuuPermissions";
 import { LanguageStore } from "./structures/LanguageStore";
+import { MonitorStore } from "./structures/MonitorStore";
 
 export class MiyuuClient extends Client {
 	application: ClientApplication = null;
@@ -14,6 +15,7 @@ export class MiyuuClient extends Client {
 	data: MiyuuData;
 	arguments: ArgumentStore;
 	language: LanguageStore;
+	monitors: MonitorStore;
 	permissions: MiyuuPermissions;
 
 	constructor(options: MiyuuOptions) {
@@ -26,6 +28,7 @@ export class MiyuuClient extends Client {
 
 		this.arguments = new ArgumentStore(this);
 		this.language = new LanguageStore(this);
+		this.monitors = new MonitorStore(this);
 
 		this.permissions = new MiyuuPermissions(options.permissionLevels);
 	}
