@@ -4,6 +4,7 @@
 
 import { MiyuuDate } from "./classes/MiyuuDate";
 import { MiyuuOptions } from "./interfaces/MiyuuOptions";
+import { presenceHelper } from "./utilities/presenceHelper";
 
 export class MiyuuUtil {
 	date: MiyuuDate;
@@ -22,6 +23,8 @@ export class MiyuuUtil {
 	getRandom(min: number, max: number): number {
 		return Math.floor(Math.random() * (max - min)) + min;
 	}
+
+	presenceHelper = presenceHelper;
 }
 
 /* Exports all needed utilities for the client. */
@@ -29,7 +32,6 @@ export class MiyuuUtil {
 /*export * as speech from "./speechHelper";
 
 exports.util = {
-	presenceHelper: require("./presenceHelper"),
 	modEmbed: require("./modEmbed"),
 	/**
 	 * Returns the best matching channel for channel messages.

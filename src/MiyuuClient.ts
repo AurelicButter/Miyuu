@@ -6,17 +6,21 @@ import { ArgumentStore } from "./structures/ArgumentStore";
 import { MiyuuPermissions } from "./classes/MiyuuPermissions";
 import { LanguageStore } from "./structures/LanguageStore";
 import { MonitorStore } from "./structures/MonitorStore";
+import { MiyuuAssets } from "./MiyuuAssets";
 
 export class MiyuuClient extends Client {
 	application: ClientApplication = null;
-	baseDirectory: string;
+	arguments: ArgumentStore;
 	assetDirectory: string;
+	baseDirectory: string;
 	util: MiyuuUtil;
 	data: MiyuuData;
-	arguments: ArgumentStore;
 	language: LanguageStore;
 	monitors: MonitorStore;
 	permissions: MiyuuPermissions;
+	timer: NodeJS.Timeout;
+	assets: MiyuuAssets;
+	globalPrefix: string;
 
 	constructor(options: MiyuuOptions) {
 		super(options);
@@ -25,12 +29,15 @@ export class MiyuuClient extends Client {
 		this.util = new MiyuuUtil(options);
 		this.data = new MiyuuData(this, options.database, this.assetDirectory);
 		this.assetDirectory = options.assetDirectory ? options.assetDirectory : `${this.baseDirectory}\\assets`;
+		this.globalPrefix = options.globalPrefix;
 
 		this.arguments = new ArgumentStore(this);
 		this.language = new LanguageStore(this);
 		this.monitors = new MonitorStore(this);
 
 		this.permissions = new MiyuuPermissions(options.permissionLevels);
+
+		this.assets = new MiyuuAssets(this.assetDirectory);
 	}
 
 	/**

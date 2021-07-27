@@ -7,4 +7,5 @@ export interface MiyuuOptions extends ClientOptions {
 	dateOptions?: DateOptions;
 	database: MiyuuDBOptions;
 	permissionLevels?: number;
+	globalPrefix: string;
 }
