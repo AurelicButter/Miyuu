@@ -2,7 +2,7 @@ import { PresenceStatusData } from "discord.js";
 import { presenceData } from "../interfaces/presenceData";
 import { MiyuuClient } from "../MiyuuClient";
 
-let games: presenceData;
+let presenceList: presenceData;
 const tList = ["play", "stream", "listen", "watch"];
 
 function Presence(client: MiyuuClient, type: string, name: string, status: PresenceStatusData) {
@@ -16,12 +16,12 @@ function determineStatus(previous?: string): string[] {
 	let items: string[];
 	if (previous) {
 		do {
-			items = games[Math.floor(Math.random() * games.length)];
+			items = presenceList[Math.floor(Math.random() * presenceList.length)];
 		} while (items[0] === previous);
 		return items;
 	}
 
-	return games[Math.floor(Math.random() * games.length)];
+	return presenceList[Math.floor(Math.random() * presenceList.length)];
 }
 
 export function presenceHelper(
@@ -31,7 +31,11 @@ export function presenceHelper(
 	status: PresenceStatusData = "online"
 ): void {
 	const sliceCheck = `${client.globalPrefix}help |`.length;
-	games = client.assets.presence;
+	presenceList = client.assets.presence;
+
+	if (presenceList === null) {
+		presenceList = [["Listing for commands", "play"]];
+	}
 
 	if (name === "-start" || name === "-reset" || name === null) {
 		let newStatus = determineStatus();
